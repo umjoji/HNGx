@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""HNG Stage one task."""
+"""HNG Stage one task with FastAPI."""
 
 from fastapi import FastAPI, Query
 from datetime import datetime, timedelta
