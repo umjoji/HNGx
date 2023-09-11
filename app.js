@@ -1,16 +1,19 @@
 const express = require('express');
 const app = express();
+const url = require('url');
 const port = process.env.PORT || 3000;
 
 // API route
 app.get('/api', (req, res) => {
   // Extract query parameters
-  const { slack_name, track } = req.query;
+  const queryData = url.parse(req.url, true).query;
+  const slackName = queryData.slack_name;
+  const track = queryData.track;
 
   // Get current day and format
   const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' });
 
-    // Create a new Date object representing the current time
+  // Create a new Date object representing the current time
   const now = new Date();
 
   // Extract the individual components (year, month, day, hour, minute, second)
@@ -36,10 +39,10 @@ app.get('/api', (req, res) => {
 
   // Construct response
   const response = {
-    slack_name: 'Nemoji',
+    slack_name: slackName,
     current_day: currentDay,
     utc_time: formattedTime,
-    track: 'backend',
+    track: track,
     github_file_url: githubFileUrl,
     github_repo_url: githubRepoUrl,
     status_code: 200,

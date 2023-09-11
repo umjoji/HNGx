@@ -9,8 +9,8 @@ app = FastAPI()
 
 @app.get("/api")
 async def get_api_data(
-    slack_name: str = Query("Nemoji", description="Your Slack name"),
-    track: str = Query("backend", description="Your track"),
+    slack_name: str = Query(..., description="Your Slack name"),
+    track: str = Query(..., description="Your track"),
 ):
     current_day = datetime.utcnow().strftime("%A")
     current_utc_time = (datetime.utcnow() + timedelta(minutes=2)).isoformat()
